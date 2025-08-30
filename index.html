@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tourism Website</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">Tourism Website</div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#destinations">Destinations</a></li>
+      <li><a href="#booking">Booking</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="menu-toggle">&#9776;</div>
+  </nav>
+
+  <!-- Header -->
+  <header class="hero">
+    <h1>Explore the World </h1>
+    <p>Your gateway to unforgettable journeys</p>
+  </header>
+
+  <!-- Destinations -->
+  <section id="destinations" class="destinations">
+    <h2>Top Destinations</h2>
+    <div class="destination-grid">
+      <div class="destination">
+        <img src="images/NewYork.jpeg" alt="New York">
+        <h3>New York</h3>
+        <p>The city that never sleeps</p>
+        <button class="details-btn" 
+          data-place="New York" 
+          data-description="The city that never sleeps, filled with skyscrapers, Times Square, and Central Park." 
+          data-details="Explore Broadway, enjoy Central Park, visit Statue of Liberty, and shop at Fifth Avenue.">
+          View Details
+        </button>
+      </div>
+
+      <div class="destination">
+        <img src="images/Bali.jpg" alt="Bali">
+        <h3>Bali</h3>
+        <p>Tropical paradise in Indonesia</p>
+        <button class="details-btn" 
+          data-place="Bali" 
+          data-description="A tropical paradise with stunning beaches, temples, and rice terraces." 
+          data-details="Relax at Kuta Beach, explore Ubud's rice terraces, and visit Tanah Lot Temple.">
+          View Details
+        </button>
+      </div>
+
+      <div class="destination">
+        <img src="images/Paris.jpg" alt="Paris">
+        <h3>Paris</h3>
+        <p>The city of love and lights</p>
+        <button class="details-btn" 
+          data-place="Paris" 
+          data-description="The romantic city known for Eiffel Tower, museums, and charming cafes." 
+          data-details="Climb the Eiffel Tower, visit Louvre Museum, and stroll along the Seine.">
+          View Details
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modal-title"></h2>
+      <p id="modal-description"></p>
+      <p id="modal-details"></p>
+      <button id="book-now">Book Now</button>
+    </div>
+  </div>
+
+  <!-- Booking Section -->
+  <section id="booking" class="booking">
+    <h2>Book Your Trip</h2>
+    <form id="booking-form">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+
+      <label for="destination">Destination</label>
+      <input type="text" id="destination" placeholder="Selected destination" readonly required>
+
+      <label for="date">Travel Date</label>
+      <input type="date" id="date" required>
+
+      <button type="submit">Confirm Booking</button>
+    </form>
+  </section>
+
+  <!-- Contact -->
+  <footer id="contact">
+    <p>Contact us at support@travel.com | &copy; Tourism Website</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
