@@ -1,11 +1,3 @@
-// Navbar toggle
-const menuToggle = document.querySelector(".menu-toggle");
-const navLinks = document.querySelector(".nav-links");
-
-menuToggle.addEventListener("click", () => {
-  navLinks.classList.toggle("active");
-});
-
 // Modal Elements
 const modal = document.getElementById("modal");
 const modalTitle = document.getElementById("modal-title");
@@ -13,9 +5,11 @@ const modalDescription = document.getElementById("modal-description");
 const modalDetails = document.getElementById("modal-details");
 const closeBtn = document.querySelector(".close");
 const bookNowBtn = document.getElementById("book-now");
+
+// Booking form destination input
 const destinationInput = document.getElementById("destination");
 
-// Open modal
+// Open modal with details
 document.querySelectorAll(".details-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const place = btn.getAttribute("data-place");
@@ -26,7 +20,9 @@ document.querySelectorAll(".details-btn").forEach(btn => {
     modalDescription.textContent = description;
     modalDetails.textContent = details;
 
+    // Store destination for booking form
     bookNowBtn.setAttribute("data-place", place);
+
     modal.style.display = "flex";
   });
 });
@@ -35,25 +31,49 @@ document.querySelectorAll(".details-btn").forEach(btn => {
 closeBtn.addEventListener("click", () => {
   modal.style.display = "none";
 });
+
+// Close modal on outside click
 window.addEventListener("click", (e) => {
-  if (e.target === modal) modal.style.display = "none";
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
 });
 
-// Book Now button → prefill booking form
+// Book Now button → scroll to booking form & prefill
 bookNowBtn.addEventListener("click", () => {
   const place = bookNowBtn.getAttribute("data-place");
-  destinationInput.value = place;
+  destinationInput.value = place; // auto-fill destination
   modal.style.display = "none";
   document.getElementById("booking").scrollIntoView({ behavior: "smooth" });
 });
 
-// Booking form submit
-document.getElementById("booking-form").addEventListener("submit", (e) => {
+// Booking form submit with AJAX
+document.getElementById("booking-form").addEventListener("submit", function(e) {
   e.preventDefault();
-  const name = document.getElementById("name").value;
-  const destination = destinationInput.value;
-  const date = document.getElementById("date").value;
 
-  alert(`Booking Confirmed!\nName: ${name}\nDestination: ${destination}\nDate: ${date}`);
-  e.target.reset();
+  const formData = new FormData(this);
+
+  fetch("booking.php", {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.text())
+  .then(data => {
+    // Show popup with confirmation
+    document.getElementById("popup-message").textContent = data;
+    document.getElementById("success-popup").style.display = "flex";
+    this.reset();
+  })
+  .catch(err => alert("Error: " + err));
+});
+
+// Close popup
+document.querySelector(".close-popup").addEventListener("click", () => {
+  document.getElementById("success-popup").style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === document.getElementById("success-popup")) {
+    document.getElementById("success-popup").style.display = "none";
+  }
 });
